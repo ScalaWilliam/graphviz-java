@@ -65,7 +65,7 @@ public class EngineTest {
     @Test
     public void jdk() {
         Graphviz.useEngine(new GraphvizJdkEngine());
-        assertThat(Graphviz.fromString("graph g {a--b}").render(SVG_STANDALONE).toString(), startsWith(START1_4));
+        assertThat(Graphviz.fromString("graph g {a--b}").render(SVG_STANDALONE).toString(), startsWith(START1_7));
     }
 
     @Test

@@ -18,6 +18,7 @@ package guru.nidi.graphviz.engine;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
+import java.io.InputStreamReader;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -56,7 +57,7 @@ public class GraphvizJdkEngine extends AbstractJsGraphvizEngine {
     protected void doInit() throws Exception {
         try {
             ENGINE.eval(jsInitEnv());
-            ENGINE.eval(jsVizCode("1.4.1"));
+            ENGINE.eval("load('classpath:viz-1.8.0.js')");
             ENGINE.eval("Viz('digraph g { a -> b; }');");
         } catch (AssertionError e) {
             throw new IllegalStateException(
