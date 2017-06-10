@@ -35,8 +35,10 @@ public class GraphvizJdkEngine extends AbstractJsGraphvizEngine {
 
     @Override
     protected String jsExecute(String jsCall) {
+        String call = "$$prints=[]; " + jsCall;
         try {
-            return (String) ENGINE.eval("$$prints=[]; " + jsCall);
+
+            return (String) ENGINE.eval(call);
         } catch (ScriptException e) {
             if (e.getMessage().startsWith("abort")) {
                 try {
@@ -49,7 +51,10 @@ public class GraphvizJdkEngine extends AbstractJsGraphvizEngine {
                     //fall through to general exception
                 }
             }
-            throw new GraphvizException("Problem executing graphviz", e);
+            throw new GraphvizException("Problem executing graphviz, " + call, e);
+        } catch (Throwable e) {
+            System.out.println("Called: " + call);
+            throw e;
         }
     }
 
